@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+</head>
+
+<body>
+    <form id="login">
+        <div>
+            <label>
+                <input type="text" name="username">
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="password" name="password">
+            </label>
+        </div>
+        <button type="submit">登录</button>
+    </form>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        const $login = $('#login')
+        $login.on('submit', (e) => {
+            e.preventDefault()
+            const name = $login.find('input[name=username]').val()
+            const password = $login.find('input[name=password]').val()
+            $.ajax({
+                url: '/doLogin',
+                method: 'POST',
+                data: JSON.stringify({ name, password }),
+                contentType: 'text/json;charset=utf-8'
+            }).then(res => {
+                alert(res)
+                location.href = '/'
+            })
+        })
+    </script>
+</body>
+
+</html>
